@@ -1,0 +1,37 @@
+.env
+REACT_APP_SANITY_PROJECT_ID = 9djv6ma2
+REACT_APP_SANITY_TOKEN = sk9E3rUN2zeIk4fbnfkvo68pvVEBHiEuvm7HR36PRjYAWToTfFfLCT6C9ymKC8jA6UzubHDDfiX8LhMimwuy6iHbTuHDnGqgN6xH4NdE8QP7ohyyrPOHQbsSAZPo7ftHx08O7NAW59FlOpmUmVXLiB0fmydEvnKmVQDfy5IjeNXaecPPdhIV
+
+---
+--
+-
+@Client.jsx
+// sanity libs
+import sanityClient from '@sanity/client';
+import imageUrlBuilder from '@sanity/image-url';
+
+export const client = sanityClient({
+  projectId: '',
+  dataSet: 'production',
+  apiVersion: '14-01-2022',
+  useCdn: true,
+  token: '',
+});
+
+const builder = imageUrlBuilder(client);
+
+export const urlFor = (source) => builder.image(source);
+
+---
+--
+-
+@Login.jsx
+
+    // TODO: integrasi sanity backend dengan google API
+    const doc = {
+      _id: googleId,
+      _type: 'user',
+      userName: name,
+      image: imageUrl,
+    };
+  };
