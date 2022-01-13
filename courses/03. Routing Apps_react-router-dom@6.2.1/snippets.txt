@@ -1,0 +1,44 @@
+@index.js
+import { BrowserRouter as Router } from 'react-router-dom';
+ReactDOM.render(
+  <Router>
+    <App />
+  </Router>,
+  document.getElementById('root'),
+);
+-
+-
+-
+@App.js
+
+import { Routes, Route, useNavigate } from 'react-router-dom';
+
+// components
+import Login from './components/Login';
+// container
+import Home from './container/Home';
+
+    <Routes>
+      <Route path="/*" element={<Home />} />
+      <Route path="login" element={<Login />} />
+    </Routes>
+-
+-
+-
+@Home.jsx
+import React from 'react';
+
+function Home() {
+  return <div>Home</div>;
+}
+
+export default Home;
+
+@Login.jsx
+import React from 'react';
+
+const Login = () => {
+  return <div>Login</div>;
+};
+
+export default Login;
