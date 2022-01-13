@@ -6,11 +6,16 @@ import { useNavigate } from 'react-router-dom';
 // google logo
 import { FcGoogle } from 'react-icons/fc';
 
+// container Client
+import { client } from '../container/Clients';
+
 // assets
 import sharedVideo from '../assets/share.mp4';
 import logo from '../assets/logo.png';
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const responseGoogle = (response) => {
     localStorage.setItem('user', JSON.stringify(response.profileObj));
 
@@ -23,6 +28,10 @@ const Login = () => {
       userName: name,
       image: imageUrl,
     };
+
+    client.createIfNotExists(doc).then(() => {
+      navigate('/', { replace: true });
+    });
   };
 
   return (

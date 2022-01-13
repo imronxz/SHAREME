@@ -1,7 +1,6 @@
 .env
 REACT_APP_SANITY_PROJECT_ID = 9djv6ma2
-REACT_APP_SANITY_TOKEN = sk9E3rUN2zeIk4fbnfkvo68pvVEBHiEuvm7HR36PRjYAWToTfFfLCT6C9ymKC8jA6UzubHDDfiX8LhMimwuy6iHbTuHDnGqgN6xH4NdE8QP7ohyyrPOHQbsSAZPo7ftHx08O7NAW59FlOpmUmVXLiB0fmydEvnKmVQDfy5IjeNXaecPPdhIV
-
+REACT_APP_SANITY_TOKEN = skZFKmRJIysLZsH4JAmUuuCaNdjg9vhsGh7EfoUTx109LgSe13mASEuCzeRwAZwVIDYiYI679hRpIsWqbALHwnjW3JcRts6DEXsjdR6g5Zojxpklhuurg9JGza8phXjOx2EGt1ZZeyXqsaqIkKLVDWej4ywwgtsRyFXTChnMmavuKCmUxwP7
 ---
 --
 -
@@ -12,8 +11,8 @@ import imageUrlBuilder from '@sanity/image-url';
 
 export const client = sanityClient({
   projectId: '',
-  dataSet: 'production',
-  apiVersion: '14-01-2022',
+  dataset: 'production',
+  apiVersion: '22-01-14',
   useCdn: true,
   token: '',
 });
@@ -27,6 +26,14 @@ export const urlFor = (source) => builder.image(source);
 -
 @Login.jsx
 
+// container Client
+import { client } from '../container/Clients';
+
+const Login = () => {
+  const navigate = useNavigate();
+
+  const responseGoogle = (response) => {
+
     // TODO: integrasi sanity backend dengan google API
     const doc = {
       _id: googleId,
@@ -34,4 +41,9 @@ export const urlFor = (source) => builder.image(source);
       userName: name,
       image: imageUrl,
     };
+
+    //TODO: jika sucess login navigate to home
+    client.createIfNotExists(doc).then(() => {
+      navigate('/', { replace: true });
+    });
   };
