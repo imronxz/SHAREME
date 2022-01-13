@@ -7,7 +7,7 @@ import { useNavigate } from 'react-router-dom';
 import { FcGoogle } from 'react-icons/fc';
 
 // container Client
-import { client } from '../container/Clients';
+import { client } from '../client';
 
 // assets
 import sharedVideo from '../assets/share.mp4';
