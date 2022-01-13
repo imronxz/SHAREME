@@ -1,0 +1,22 @@
+.env
+
+REACT_APP_GOOGLE_API_TOKEN = 713536291363-2863burpc3k637eu6va7oqac2p2cpr8e.apps.googleusercontent.com
+
+-
+-
+-
+@Login.jsx
+
+  //TODO: fetching google API
+  const responseGoogle = (response) => {
+    localStorage.setItem('user', JSON.stringify(response.profileObj));
+
+    const { name, googleId, imageUrl } = response.profileObj;
+  };          
+              //FIXME: google credentials(console.cloud.google.com)
+              clientId={process.env.REACT_APP_GOOGLE_API_TOKEN}
+
+
+              onSuccess={responseGoogle}
+              onFailure={responseGoogle}
+              cookiePolicy={'single_host_origin'}
