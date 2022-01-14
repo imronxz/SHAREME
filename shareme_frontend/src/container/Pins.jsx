@@ -4,7 +4,7 @@ import { Routes, Route } from 'react-router-dom';
 import { Navbar, Feed, PinDetails, CreatePin, Search } from '../components';
 
 // Props form Home container
-function Pins({ user }) {
+const Pins = ({ user }) => {
   const [searchTerm, setSearchTerm] = useState('');
 
   return (
@@ -30,6 +30,6 @@ function Pins({ user }) {
       </div>
     </div>
   );
-}
+};
 
 export default Pins;

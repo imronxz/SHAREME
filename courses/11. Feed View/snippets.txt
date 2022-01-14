@@ -1,0 +1,173 @@
+@data.js
+/* GROQ - Graph Relational Object Queries */
+
+export const userQuery = (userId) => {
+  const query = `*[_type == "user" && _id == "${userId}"]`;
+
+  return query;
+};
+/* 
+ ${searchTerm}* -> mulai mencocokkan dengan searchTerm sebelum selesai mencocokkan dengan *
+*/
+export const searchQuery = (searchTerm) => {
+  const query = `*[_type == "pin" && title match '${searchTerm}*' || category match '${searchTerm}*' || about match '${searchTerm}*']{
+        image{
+          asset->{
+            url
+          }
+        },
+            _id,
+            destination,
+            postedBy->{
+              _id,
+              userName,
+              image
+            },
+            save[]{
+              _key,
+              postedBy->{
+                _id,
+                userName,
+                image
+              },
+            },
+          }`;
+  return query;
+};
+
+export const feedQuery = `*[_type == "pin"] | order(_createdAt desc) {
+  image{
+    asset->{
+      url
+    }
+  },
+      _id,
+      destination,
+      postedBy->{
+        _id,
+        userName,
+        image
+      },
+      save[]{
+        _key,
+        postedBy->{
+          _id,
+          userName,
+          image
+        },
+      },
+    } `;
+
+---------------------------------------------------------------------------------
+@Feed.jsx
+import React, { useState, useEffect } from 'react';
+import { useParams } from 'react-router-dom';
+
+import { client } from '../client';
+import { feedQuery, searchQuery } from '../utils/data';
+import MasonryLayout from './MasonryLayout';
+import Spinner from './Spinner';
+
+const Feed = () => {
+  const [pins, setPins] = useState();
+  const [loading, setLoading] = useState(false);
+  const { categoryId } = useParams();
+
+  useEffect(() => {
+    setLoading(true);
+
+    if (categoryId) {
+      const query = searchQuery(categoryId);
+
+      client.fetch(query).then((data) => {
+        setPins(data);
+        setLoading(false);
+      });
+    } else {
+      client.fetch(feedQuery).then((data) => {
+        setPins(data);
+        setLoading(false);
+      });
+    }
+  }, [categoryId]);
+
+  if (loading) {
+    return <Spinner message={`We are adding ideas to your feed!`} />;
+  }
+  return <div>{pins && <MasonryLayout pins={pins} />}</div>;
+};
+
+export default Feed;
+
+--------------------------------------------------------------------------------
+@Spinner.jsx
+import React from 'react';
+import Loader from 'react-loader-spinner';
+
+const Spinner = ({ message }) => {
+  return (
+    <div className="flex flex-col justify-center items-center w-full h-full">
+      <Loader
+        type="Circles"
+        color="#00bfff"
+        height={50}
+        width={200}
+        className="m-5"
+      />
+      <p className="text-lg text-center px-2">{message}</p>
+    </div>
+  );
+};
+
+export default Spinner;
+
+------------------------------------------------------------------------------------------------
+@MasonryLayout.jsx
+
+import React from 'react';
+// Masonry layout: images layouting
+import Masonry from 'react-masonry-css';
+
+import Pin from './Pin';
+
+const breakpointObj = {
+  default: 4,
+  3000: 6,
+  2000: 5,
+  1200: 3,
+  1000: 2,
+  500: 1,
+};
+
+const MasonryLayout = ({ pins }) => {
+  return (
+    <Masonry className="flex animate-slide-fwd" breakpointcols={breakpointObj}>
+      {pins?.map((pin) => (
+        <Pin key={pin._id} pin={pin} className="w-max" />
+      ))}
+    </Masonry>
+  );
+};
+
+export default MasonryLayout;
+
+---------------------------------------------------------------------------------
+@Pins.jsx
+
+import React from 'react';
+// img source client.js
+import { urlFor } from '../client';
+
+const Pin = ({ pin: { postedBy, image, _id, destination } }) => {
+  return (
+    <div>
+      <img
+        className="rounded-lg w-full "
+        alt="user-post"
+        src={urlFor(image).width(250).url()}
+      />
+    </div>
+  );
+};
+
+export default Pin;

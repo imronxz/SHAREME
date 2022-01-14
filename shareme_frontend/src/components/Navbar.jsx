@@ -2,7 +2,7 @@ import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdAdd, IoMdSearch } from 'react-icons/io';
 
-function Navbar({ searchTerm, setSearchTerm, user }) {
+const Navbar = ({ searchTerm, setSearchTerm, user }) => {
   const navigate = useNavigate();
 
   if (!user) return null;
@@ -35,6 +35,6 @@ function Navbar({ searchTerm, setSearchTerm, user }) {
       </div>
     </div>
   );
-}
+};
 
 export default Navbar;

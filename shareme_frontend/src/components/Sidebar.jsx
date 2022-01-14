@@ -21,7 +21,7 @@ const categories = [
   { name: 'Other' },
 ];
 
-function Sidebar({ user, closeToggle }) {
+const Sidebar = ({ user, closeToggle }) => {
   // TODO: jika closeToggle true maka sidebar akan ditutup
   const handleCloseSideBar = () => {
     if (closeToggle) closeToggle(false);
@@ -83,6 +83,6 @@ function Sidebar({ user, closeToggle }) {
       )}
     </div>
   );
-}
+};
 
 export default Sidebar;
