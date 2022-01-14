@@ -10,7 +10,6 @@ function Navbar({ searchTerm, setSearchTerm, user }) {
   return (
     <div className="flex gap-2 md:gap-5 w-full mt-5 pb-7">
       <div className="flex justify-start items-center w-full px-2 rounded-md bg-white border-none outline-none focus-within:shadow-sm">
-        {/* TODO: search navbar */}
         <IoMdSearch fontSize={21} className="ml-1" />
         <input
           type="text"
@@ -21,7 +20,6 @@ function Navbar({ searchTerm, setSearchTerm, user }) {
           className="p-2 w-full bg-white outline-none"
         />
       </div>
-      {/* TODO: user image and create-pin */}
       <div className="flex gap-3">
         <Link to={`user-profile/${user?._id}`} className="hidden md:block">
           <img src={user.image} alt="user" className="w-14 h-12 rounded-lg" />
