@@ -16,9 +16,7 @@ function Pins({ user }) {
         <Routes>
           <Route path="/" element={<Feed />} />
           <Route path="/category/:categoryId" element={<Feed />} />
-          {/* props user from Home.jsx */}
           <Route path="/pin-detail/:pinId" element={<PinDetails user={user} />} />
-          {/* props user from Home.jsx */}
           <Route path="/create-pin" element={<CreatePin user={user} />} />
           <Route
             path="/search"

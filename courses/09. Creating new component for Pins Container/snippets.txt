@@ -1,9 +1,19 @@
+MEMBUAT Component baru untuk Pins Container
+1. Navbar.jsx
+2. Feed.jsx
+3. CreatePin.jsx
+4. PinDetails.jsx
+5. Search.jsx
+
+----------------------------------------------------------------------------------------------------
+@Pins.jsx
+
 import React, { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 import { Navbar, Feed, PinDetails, CreatePin, Search } from '../components';
 
-// Props form Home container
+//TODO: Props form Home container
 function Pins({ user }) {
   const [searchTerm, setSearchTerm] = useState('');
 
@@ -16,9 +26,9 @@ function Pins({ user }) {
         <Routes>
           <Route path="/" element={<Feed />} />
           <Route path="/category/:categoryId" element={<Feed />} />
-          {/* props user from Home.jsx */}
+          {/*FIXME: props user from Home.jsx */}
           <Route path="/pin-detail/:pinId" element={<PinDetails user={user} />} />
-          {/* props user from Home.jsx */}
+          {/*FIXME: props user from Home.jsx */}
           <Route path="/create-pin" element={<CreatePin user={user} />} />
           <Route
             path="/search"
