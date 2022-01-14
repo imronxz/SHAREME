@@ -14,17 +14,17 @@ import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
 
 const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
   const [postHovered, setPostHovered] = useState(false);
-  // navigate
+
   const navigate = useNavigate();
+
   // fetch user local Storage from utils fetchUser
   const user = fetchUser();
 
+  console.log(save);
   /* TODO: advance topic algorithm for like the photo */
-  // sudah save poto
   const alreadySaved = !!save?.filter((item) => item.postedBy._id === user.googleId)
     ?.length;
 
-  // belum save poto
   const savePin = (id) => {
     if (!alreadySaved) {
       // update doc sanity db
@@ -76,8 +76,6 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                   <MdDownloadForOffline />
                 </a>
               </div>
-              {/*TODO:  if already save true maka, hitung length save
-              else -> go to savePin(_id) */}
               {alreadySaved ? (
                 <button
                   className="bg-red-500 opacity-70 hover:opacity-100 text-white font-bold px-5 py-1 text-base rounded-3xl hover:shadow-lg outline-none"

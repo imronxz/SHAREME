@@ -1,3 +1,23 @@
+@fetchUser.js
+
+export const fetchUser = () => {
+  const userInfo =
+    localStorage.getItem('user') !== 'undefined'
+      ? JSON.parse(localStorage.getItem('user'))
+      : localStorage.clear();
+  return userInfo;
+};
+
+----------------------------------------------------------------------------
+@Home.jsx
+
+import { fetchUser } from '../utils/fetchUser';
+
+  //TODO: fetchingUser localStorage
+  const userInfo = fetchUser();
+
+----------------------------------------------------------------------------
+@Pins.jsx
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
