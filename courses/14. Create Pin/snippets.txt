@@ -1,3 +1,5 @@
+@CreatePin.jsx
+
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
@@ -20,7 +22,7 @@ const CreatePin = ({ user }) => {
   const [imageAsset, setimageAsset] = useState(null);
   const [wrongImage, setWrongImage] = useState(false);
 
-  // Navigate to the pin detail page
+  //TODO: Navigate to the pin detail page
   const navigate = useNavigate();
 
   /** @uploadImage : upload image to sanity db cloud
