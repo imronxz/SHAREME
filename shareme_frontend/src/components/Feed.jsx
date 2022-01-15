@@ -32,6 +32,13 @@ const Feed = () => {
   if (loading) {
     return <Spinner message={`We are adding ideas to your feed!`} />;
   }
+  if (!pins?.length)
+    return (
+      <div className="flex mt-28 font-bold w-full text-rose-700 text-3xl items-center justify-center capitalize  ">
+        😭Tidak terdapat gambar dengan kategori tersebut...😥
+      </div>
+    );
+
   return <div>{pins && <MasonryLayout pins={pins} />}</div>;
 };
 
