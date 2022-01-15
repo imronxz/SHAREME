@@ -65,7 +65,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
         <img
           className="rounded-lg w-full "
           alt="user-post-Pin"
-          src={urlFor(image).width(550).url()}
+          src={urlFor(image).width(250).url()}
         />
         {postHovered && (
           <div className="absolute top-0 w-full h-full flex flex-col justify-between p-1 pr-2 pt-2 pb-2 z-50">
@@ -136,18 +136,23 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
           </div>
         )}
       </div>
+
       {/* TODO: postedBy  */}
-      <Link
-        to={`user-profile/${postedBy?._id}`}
-        className="flex gap-2 mt-2 items-center"
-      >
-        <img
-          src={postedBy?.image}
-          className="w-8 h-8 rounded-full object-cover"
-          alt="user-profile"
-        />
-        <p className="font-semibold capitalize"> {postedBy?.userName}</p>
-      </Link>
+      {postedBy && (
+        <>
+          <Link
+            to={`user-profile/${postedBy?._id}`}
+            className="flex gap-2 mt-2 items-center"
+          >
+            <img
+              src={postedBy?.image}
+              className="w-8 h-8 rounded-full object-cover"
+              alt="user-profile"
+            />
+            <p className="font-semibold capitalize">By: {postedBy?.userName}</p>
+          </Link>
+        </>
+      )}
     </div>
   );
 };
