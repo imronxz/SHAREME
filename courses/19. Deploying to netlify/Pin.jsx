@@ -21,9 +21,8 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
 
   /* TODO: advance topic algorithm for like the photo */
   // sudah save poto
-  const alreadySaved = !!save?.filter(
-    (item) => item?.postedBy?._id === user?.googleId,
-  )?.length;
+  const alreadySaved = !!save?.filter((item) => item.postedBy._id === user?.googleId)
+    ?.length;
 
   // belum save poto
   const savePin = (id) => {

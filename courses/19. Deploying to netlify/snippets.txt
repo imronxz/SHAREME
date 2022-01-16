@@ -1,0 +1,25 @@
+https://connect-galery.netlify.app/
+
+***************************************************************************************************
+@App.js
+
+import React, { useEffect } from 'react';
+import { fetchUser } from './utils/fetchUser';
+
+const App = () => {
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const user = fetchUser();
+
+    if (!user) {
+      navigate('/login');
+    }
+  }, []);
+----------------------------------------------------------------------------------------
+@Pin.jsx
+
+  const alreadySaved = !!save?.filter((item) => item.postedBy._id === user?.googleId)
+            userId: user?.googleId,
+              _ref: user?.googleId,
+              {postedBy?._id === user?.googleId && (
