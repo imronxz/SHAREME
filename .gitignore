@@ -1,3 +1,4 @@
 shareme_backend/.npmignore
 
 node_modules/
+.env
