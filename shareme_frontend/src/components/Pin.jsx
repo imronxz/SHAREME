@@ -116,7 +116,7 @@ const Pin = ({ pin: { postedBy, image, _id, destination, save } }) => {
                 >
                   <BsFillArrowUpRightCircleFill />
                   {destination.length > 30
-                    ? destination.slice(8, 29)
+                    ? destination.slice(8, 20)
                     : destination.slice(8)}
                 </a>
               )}
